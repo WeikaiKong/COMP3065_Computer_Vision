@@ -1,3 +1,4 @@
+from matplotlib.pyplot import axis
 import torch
 
 # scalar
@@ -32,3 +33,48 @@ B = A.clone()
 print(A,A+B)
 # hadamard product: each element in two arraies production
 print(A*B)
+
+# dimention reduction
+x = torch.arange(4, dtype=torch.float32)
+print(x, x.sum())
+print(A.sum(), A.shape)
+# dimention reduction in axis = 0
+A_sum_axix0 = A.sum(axis=0)
+print(A_sum_axix0,A_sum_axix0.shape)
+# dimention reduction in axis = [0,1]
+# same as A.sum()
+A.sum(axis=[0,1])
+# mean
+print(A.mean())
+print(A.sum()/A.numel())
+# mean in axis = 0
+print(A.mean(axis=0))
+print(A.sum(axis=0)/A.shape[0]) 
+# usually we need to keep the dimention
+# calculating means value without dimention reduction
+print(A.sum(axis=1))
+sum_A = A.sum(axis=1, keepdim=True)
+print(sum_A)
+# broadcasting
+print(A/sum_A)
+# Cumulative sum
+print(A.cumsum(axis=0))
+
+# dot
+y = torch.ones(4, dtype=torch.float32)
+print(x,y,torch.dot(x,y))
+print(torch.sum(x*y))
+# matrix verctor multiplication
+print(A.shape,x.shape,torch.mv(A,x))
+# matrix matrix muliplication
+B = torch.ones(4,3)
+print(torch.mm(A,B))
+
+# normal
+u = torch.tensor([3.0, -4.0])
+print(torch.norm(u))
+# L1 normal
+# sum of abs
+print(torch.abs(u).sum())
+# Frobenius normal
+torch.normal(torch.ones(4,9))
