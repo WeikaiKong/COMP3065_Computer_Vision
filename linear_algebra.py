@@ -1,3 +1,4 @@
+from cgi import test
 from matplotlib.pyplot import axis
 import torch
 
@@ -43,6 +44,9 @@ A_sum_axix0 = A.sum(axis=0)
 print(A_sum_axix0,A_sum_axix0.shape)
 # dimention reduction in axis = [0,1]
 # same as A.sum()
+# eg. shape[2,5,4], when axis = 0, then [5,4]; when axis = 1, then [2,4]; when axis = 2, then [2,5]
+# when axis = [1,2], then [2]
+# so for axis = [a1, a2..an], just delete an in shape[1..m]
 A.sum(axis=[0,1])
 # mean
 print(A.mean())
@@ -52,6 +56,8 @@ print(A.mean(axis=0))
 print(A.sum(axis=0)/A.shape[0]) 
 # usually we need to keep the dimention
 # calculating means value without dimention reduction
+# eg. shape[2,5,4], when axis = 0, then [1,5,4]
+# so just when axis = 1..n, then [1]..[n] = 1
 print(A.sum(axis=1))
 sum_A = A.sum(axis=1, keepdim=True)
 print(sum_A)
